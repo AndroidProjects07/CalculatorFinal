@@ -1,3 +1,15 @@
+/*
+ * Ứng dụng Calculator đơn giản với những phép tính quen thuộc như: Cộng, Trừ, Nhân, Chia,
+ * Phần trăm, Bình phương, Căn bậc 2, Tính giai thừa làm việc với cả số nguyên và số thực.
+ * Ứng dụng được thực hiện bởi nhóm 7 - Lập trình di động - Chiều thứ 5
+ * Giảng viên hướng dẫn: Cô Trương Thị Ngọc Phượng
+ * Thành viên nhóm:
+ *      Nguyễn Thanh Giàu - 16110317
+ *      Trần Văn Luyện - 16110385
+ *      Nguyễn Trường Yên - 16110531
+ *      Trần Phạm Minh Tín - 16110487
+ *      Trần Minh Tùng - 16110516
+ */
 package com.group7.calculator;
 
 import android.os.Bundle;
@@ -11,6 +23,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private TextView tvMath;
     private TextView tvResult;
+    private String mAns = "0";
+    private Boolean mF = false;
+    //list the ids of the buttons
     private int[] idButton = {
             R.id.btn0,
             R.id.btn1, R.id.btn2, R.id.btn3,
@@ -50,7 +65,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View view)
     {
         int id = view.getId();
-
+        if (mF == true)
+        {
+            mF = false;
+            tvMath.setText("");
+        }
         for (int i = 0; i < idButton.length - 3; i++) {
             if (id == idButton[i]) {
                 String text = ((TextView) findViewById(id)).getText().toString();
@@ -96,7 +115,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Toast.makeText(MainActivity.this, error
                         , Toast.LENGTH_SHORT).show();
             } else { // show result
-                tvResult.setText(result);
+                //save the result into ans when we touch the button =
+                if (math.equals("ans")) {
+                    tvResult.setText(mAns.toString());
+                } else {
+                    tvResult.setText(result);
+                    mAns = result;
+                    mF = true;
+                }
             }
         }
     }
