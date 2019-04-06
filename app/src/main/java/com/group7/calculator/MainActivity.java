@@ -17,6 +17,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
+import java.text.DecimalFormat;
 
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -82,8 +83,30 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
                 if (id==R.id.btnANS) {
 
-                    tvMath.append("ans");
+                    tvMath.append(mAns);
                 } else {
+                    if(id==R.id.btnSub){
+                        String a=tvMath.getText().toString();
+                        if(a.length()!=0){
+                            a=a.substring(a.length()-1);
+                            if(a.equals("-")||a.equals("."))
+                                return;
+                        }
+                    }else {
+                        if (id == R.id.btnDiv || id == R.id.btnDot || id == R.id.btnMul || id == R.id.btnPlus || id == R.id.btnClose
+                                || id == R.id.btnX2 || id == R.id.btnMod || id == R.id.btnFactorial) {
+                            if (KyTuCuoi(tvMath.getText().toString()))
+                                return;
+                        }
+                        if (id == R.id.btnOpen) {
+                            String a = tvMath.getText().toString();
+                            if (a.length() != 0) {
+                                a = a.substring(a.length() - 1);
+                                if (a.equals("."))
+                                    return;
+                            }
+                        }
+                    }
                     //show the text of the textview
                     tvMath.append(text);
                 }
@@ -102,6 +125,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 {
                     String mTextMath;
                     mTextMath = tvMath.getText().toString();
+                    if(mTextMath.length()<=0)
+                        return;
                     mTextMath = mTextMath.substring(0,mTextMath.length()-1);
                     tvMath.setText(mTextMath);
                 }
@@ -109,11 +134,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void Calculate() {
 
+        mF=true;
         String math = tvMath.getText().toString().trim();
         if (math.length() > 0) {
             Balan balan = new Balan();
             String result = balan.valueMath(math) + "";
             String error = balan.getError();
+            DecimalFormat df = new DecimalFormat("#.#######");
+            result = df.format(Double.parseDouble(result));
             tvResult.setText(result);
             // check error
             if (error != null) {
@@ -126,9 +154,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 } else {
                     tvResult.setText(result);
                     mAns = result;
-                    mF = true;
                 }
             }
         }
+    }
+    private boolean KyTuCuoi(String str){
+        if(str.length()==0)
+            return true;
+        String a= str;
+        a=a.substring(a.length()-1);
+        String temp="+-*/%.!√²(";
+        return  temp.contains(a);
     }
 }
