@@ -77,7 +77,7 @@ public class Balan {
         }
     }
 
-    // num!
+    // num! tính giai thừa
     private long factorial(int num) {
         if (num >= 0) {
             long result = 1;
@@ -89,21 +89,6 @@ public class Balan {
         return -1;
     }
 
-    // chinh hop chap b cua a=a!/(a-b)!=(a-b+1)(a-b+2)...a
-    private long permutation(int a, int b) {
-        if (a < b) {
-            return -1;
-        }
-        if (a >= 0 && b >= 0) {
-            long result = 1;
-            int c = a - b;
-            for (int i = c + 1; i <= a; i++) {
-                result *= i;
-            }
-            return result;
-        }
-        return -1;
-    }
 
     // to hop chap b cua a
     private long combination(int a, int b) {
@@ -510,7 +495,9 @@ public class Balan {
 
     public Double valueMath(String math) {
         math = processInput(math);
+        System.out.println("Process input:"+ math);
         math = postFix(math);
+        System.out.println("PostFix input:"+ math);
         String[] elementMath = trimString(math);
         Stack<Double> S = new Stack<Double>();
         double num = 0.0;
@@ -530,7 +517,9 @@ public class Balan {
                 }
                 double num1 = S.pop();
                 String ei = elementMath[i];
-                if (ei.equals("%")) {
+                if (ei.equals("~")) {
+                    num = -num1;
+                } else if (ei.equals("%")) {
                     num = num1 / 100;
                 } else if (ei.equals("√") || ei.equals("sqrt")) {
                     if (num1 >= 0) {

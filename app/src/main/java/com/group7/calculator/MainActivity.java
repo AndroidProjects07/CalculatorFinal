@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private TextView tvMath;
     private TextView tvResult;
     private String mAns = "0";
-    private Boolean mF = false, mDaTinh=false;
+    private Boolean mF = false;
     //list the ids of the buttons
     private int[] idButton = {
             R.id.btn0,
@@ -55,10 +55,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         Init();
     }
+
+    //Hàm khởi tạo
     private void Init()
     {
-        tvMath.setText("|");
-        tvResult.setText("0");
+        tvMath.setText("|"); //khởi tạo textview math ban đầu bằng ký tự |
+        tvResult.setText("0"); //khởi tạo
     }
 
     @Override
@@ -68,6 +70,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (mF == true)
         {
             mF = false;
+            tvMath.setText("");
         }
         for (int i = 0; i < idButton.length - 3; i++) {
             if (id == idButton[i]) {
@@ -78,13 +81,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     tvMath.setText("");
                 }
                 if (id==R.id.btnANS) {
-                    if (mDaTinh==true)
-                        tvMath.setText("");
+
                     tvMath.append("ans");
                 } else {
                     //show the text of the textview
                     tvMath.append(text);
-                    mDaTinh=false;
                 }
                 return;
             }
@@ -96,7 +97,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         } else //calculate
             if (id == R.id.btnResult) {
                 Calculate();
-                mDaTinh=true;
             } else //delete the last number of the string
                 if (id==R.id.btnDel)
                 {
@@ -104,7 +104,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     mTextMath = tvMath.getText().toString();
                     mTextMath = mTextMath.substring(0,mTextMath.length()-1);
                     tvMath.setText(mTextMath);
-                    mDaTinh=false;
                 }
     }
 

@@ -101,7 +101,7 @@ public class ConvertNumber {
                 // cong them phan tu neu no chia het
                 if (powCount > 0) {
                     if (s.length() > 0) {
-                        s += "×"; // cong dau nhan
+                        s += "Ã—"; // cong dau nhan
                     }
                     s += i; // cong so vao
                     if (powCount > 1) {
@@ -118,7 +118,7 @@ public class ConvertNumber {
             //neu la so nguyen to thi cho them vao
             if (num > 1) {
                 if (s.length() > 0) {
-                    s += "×";
+                    s += "Ã—";
                 }
                 s += num;
             } else if (s.length() == 0) {
@@ -131,7 +131,7 @@ public class ConvertNumber {
 
     private String myPowAxB(int number) {
         String numString = number + "";
-        String numPow = "⁰¹²³⁴⁵⁶⁷⁸⁹";
+        String numPow = "â�°Â¹Â²Â³â�´â�µâ�¶â�·â�¸â�¹";
         String result = "";
         for (int i = 0; i < numString.length(); i++) {
             result += numPow.charAt(Integer.parseInt(numString.charAt(i) + ""));
