@@ -387,7 +387,7 @@ public class Balan {
             }
             // check so am
             if ((i == 0 || (i > 0 && !isNumber(s[i - 1]) && !s[i - 1].equals(")") && !isPostOperator(s[i - 1])))
-                    && (s[i].equals("-")) && (isNumber(s[i + 1]) || s[i + 1].equals("-"))) {
+                    && (s[i].equals("-")) && (isNumber(s[i + 1]) || s[i + 1].equals("-")|| s[i + 1].equals("√"))) {
                 s1 = s1 + "~ ";
             } // VD hoac 6π , ...)π chuyen sang 6*π , ...)*π
             else if (i > 0 && ((isNumber(s[i - 1]) || s[i - 1].equals(")")) && isVarOrConst(s[i]))) {
